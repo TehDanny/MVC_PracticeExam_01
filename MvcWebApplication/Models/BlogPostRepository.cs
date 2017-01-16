@@ -7,6 +7,23 @@ namespace MvcWebApplication.Models
 {
     public class BlogPostRepository
     {
-        public static List<BlogPost> blogPostList = new List<BlogPost>();
+        private static List<BlogPost> blogPostList = new List<BlogPost>();
+        private static object myLock = new object();
+
+        public static void AddBlogPost(BlogPost blogpost)
+        {
+            lock(myLock)
+            {
+                blogPostList.Add(blogpost);
+            }
+        }
+
+        public static List<BlogPost> GetAllBlogPosts()
+        {
+            lock(myLock)
+            {
+                return blogPostList;
+            }
+        }
     }
 }
