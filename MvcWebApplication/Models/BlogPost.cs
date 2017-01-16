@@ -9,6 +9,7 @@ namespace MvcWebApplication.Models
     public class BlogPost
     {
         [Required(ErrorMessage ="ID is required")]
+        [Key]
         public int ID { get; set; }
 
         [Required(ErrorMessage = "Title is required")]
